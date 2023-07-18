@@ -41,7 +41,7 @@ public class Course {
     private Teacher teacher;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "courses")
+    @OneToMany(mappedBy = "course")
     private List<Exam> exams;
 
     @JsonIgnore

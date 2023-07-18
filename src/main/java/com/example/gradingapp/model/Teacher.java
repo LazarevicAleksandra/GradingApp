@@ -32,7 +32,7 @@ public class Teacher {
     private String surname;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "teachers")
+    @OneToMany(mappedBy = "teacher")
     private List<Course> courses;
 
     public Teacher() {
