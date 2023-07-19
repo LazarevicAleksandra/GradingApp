@@ -35,11 +35,11 @@ public class TeacherService implements TeacherServiceInterface {
     }
 
     @Override
-    public Teacher updateTeacher(Teacher teacher) {
+    public Teacher updateTeacher(Teacher teacher, Long id) {
 
-        if (teacherRepository.existsById(teacher.getId())) {
+        if (teacherRepository.findById(id) != null) {
+            teacher.setId(id);
             return teacherRepository.save(teacher);
-
         } else
             throw new ResourceNotFoundException();
     }
@@ -58,6 +58,11 @@ public class TeacherService implements TeacherServiceInterface {
             return teacher.get();
         else
             throw new ResourceNotFoundException();
+    }
+
+    public List<Teacher> getTeacherByNameAndSurname(String name, String surname) {
+        return teacherRepository.findByNameAndSurnameContainingIgnoreCase(name, surname);
+
     }
 
 }

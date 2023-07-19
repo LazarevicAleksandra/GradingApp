@@ -1,6 +1,7 @@
 package com.example.gradingapp.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.gradingapp.model.Teacher;
@@ -28,9 +30,14 @@ public class TeacherController {
     @Autowired
     TeacherService teacherService;
 
-    @GetMapping
-    public ResponseEntity<List<Teacher>> getTeachers() {
-        return new ResponseEntity<List<Teacher>>(teacherService.getTeachers(), null, HttpStatus.OK);
+    @GetMapping("")
+    public ResponseEntity<List<Teacher>> getTeachers(@RequestParam Optional<String> name,
+            @RequestParam Optional<String> surname) {
+        if (name.isPresent() && surname.isPresent()) {
+            return new ResponseEntity<>(teacherService.getTeacherByNameAndSurname(name.get(), surname.get()), null,
+                    HttpStatus.OK);
+        } else
+            return new ResponseEntity<List<Teacher>>(teacherService.getTeachers(), null, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -40,7 +47,7 @@ public class TeacherController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Teacher> updateTeacher(@PathVariable Long id, @Valid @RequestBody Teacher teacher) {
-        return new ResponseEntity<Teacher>(teacherService.updateTeacher(teacher), null, HttpStatus.OK);
+        return new ResponseEntity<Teacher>(teacherService.updateTeacher(teacher, id), null, HttpStatus.OK);
     }
 
     @PostMapping

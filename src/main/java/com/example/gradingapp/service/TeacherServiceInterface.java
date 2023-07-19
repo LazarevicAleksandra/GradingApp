@@ -11,9 +11,11 @@ public interface TeacherServiceInterface {
 
     Teacher getTeacher(Long id);
 
+    List<Teacher> getTeacherByNameAndSurname(String name, String surname);
+
     Teacher createTeacher(Teacher teacher);
 
-    Teacher updateTeacher(Teacher teacher);
+    Teacher updateTeacher(Teacher teacher, Long id);
 
     @Transactional
     void deleteTeacher(Long id);
