@@ -10,12 +10,15 @@ import com.example.gradingapp.exceptions.ResourceNotFoundException;
 import com.example.gradingapp.model.Course;
 import com.example.gradingapp.model.Teacher;
 import com.example.gradingapp.repository.CourseRepository;
+import com.example.gradingapp.repository.TeacherRepository;
 
 @Service
 public class CourseService implements CourseServiceInterface {
 
     @Autowired
     CourseRepository courseRepository;
+    @Autowired
+    TeacherRepository teacherRepository;
 
     @Override
     public List<Course> getCourses() {
@@ -42,14 +45,27 @@ public class CourseService implements CourseServiceInterface {
 
     @Override
     public Course createCourse(Course course) {
-        return courseRepository.save(course);
+        Optional<Teacher> teacher = teacherRepository.findById(course.getTeacher().getId());
+        Course savedCourse = courseRepository.save(course);
+        if (teacher.isPresent())
+            savedCourse.setTeacher(teacher.get());
+        return savedCourse;
     }
 
     @Override
     public Course updateCourse(Course course, Long id) {
         Optional<Course> optionalCourse = courseRepository.findById(id);
+        Optional<Teacher> teacher;
         if (optionalCourse.isPresent()) {
+
+            if (course.getTeacher().getId() != null) {
+                teacher = teacherRepository.findById(course.getTeacher().getId());
+            } else {
+                teacher = teacherRepository.findById(optionalCourse.get().getTeacher().getId());
+            }
+            course.setTeacher(teacher.get());
             course.setId(id);
+
             return courseRepository.save(course);
         } else
             throw new ResourceNotFoundException();
