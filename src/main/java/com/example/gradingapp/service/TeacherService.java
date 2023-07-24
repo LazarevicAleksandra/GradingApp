@@ -37,7 +37,7 @@ public class TeacherService implements TeacherServiceInterface {
     @Override
     public Teacher updateTeacher(Teacher teacher, Long id) {
 
-        if (teacherRepository.findById(id) != null) {
+        if (teacherRepository.existsById(id)) {
             teacher.setId(id);
             return teacherRepository.save(teacher);
         } else

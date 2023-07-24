@@ -1,11 +1,13 @@
 package com.example.gradingapp.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.example.gradingapp.model.Student;
 
 public interface StudentRepository extends CrudRepository<Student, Long> {
-    Student findByNameAndSurnameContainingIgnoreCase(String name, String surname);
+    List<Student> findByNameAndSurnameContainingIgnoreCase(String name, String surname);
 
-    Student findByIndexNumberContainingIgnoreCase(String index);
+    List<Student> findByIndexNumberContainingIgnoreCase(String index);
 }

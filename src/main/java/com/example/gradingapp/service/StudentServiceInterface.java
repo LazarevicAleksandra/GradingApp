@@ -9,8 +9,14 @@ public interface StudentServiceInterface {
 
     Student getStudent(Long id);
 
-    Student saveStudent(Student student);
+    Student createStudent(Student student);
+
+    Student updateStudent(Student student, Long id);
 
     void deleteStudent(Long id);
+
+    List<Student> getByNameAndSurname(String name, String surname);
+
+    List<Student> getByIndexNumber(String index);
 
 }
