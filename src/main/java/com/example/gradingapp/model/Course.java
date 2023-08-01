@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,10 +31,12 @@ public class Course {
 
     @NotNull
     @NotBlank(message = "Name cannot be blank")
+    @Column(nullable = false, unique = true)
     private String name;
 
     @NotNull
     @NotBlank(message = "Code cannot be blank")
+    @Column(nullable = false, unique = true)
     private String code;
 
     @ManyToOne

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.gradingapp.exceptions.ResourceNotFoundException;
 import com.example.gradingapp.model.Course;
@@ -70,6 +71,7 @@ public class ExamService implements ExamServiceInterface {
     }
 
     @Override
+    @Transactional
     public void deleteExam(Long id) {
         if (examRepository.existsById(id)) {
             examRepository.deleteById(id);

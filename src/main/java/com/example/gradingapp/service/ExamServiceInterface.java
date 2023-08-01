@@ -3,6 +3,8 @@ package com.example.gradingapp.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.example.gradingapp.model.Exam;
 
 public interface ExamServiceInterface {
@@ -14,6 +16,7 @@ public interface ExamServiceInterface {
 
     Exam updateExam(Exam examm, Long Id);
 
+    @Transactional
     void deleteExam(Long id);
 
     Exam getByStudentIdAndCourseId(Long studentId, Long courseId);
