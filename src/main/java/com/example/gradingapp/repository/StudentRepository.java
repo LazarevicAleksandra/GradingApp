@@ -9,5 +9,5 @@ import com.example.gradingapp.model.Student;
 public interface StudentRepository extends CrudRepository<Student, Long> {
     List<Student> findByNameAndSurnameContainingIgnoreCase(String name, String surname);
 
-    List<Student> findByIndexNumberContainingIgnoreCase(String index);
+    Student findByIndexNumberContainingIgnoreCase(String index);
 }

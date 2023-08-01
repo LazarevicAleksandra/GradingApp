@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.example.gradingapp.model.Exam;
 
 public interface ExamRepository extends CrudRepository<Exam, Long> {
-    Optional<Exam> findByStudentIdAndCourseId(Long studentId, Long courseId);
+    Exam findByStudentIdAndCourseId(Long studentId, Long courseId);
 
 }

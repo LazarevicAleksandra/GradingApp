@@ -10,8 +10,12 @@ public interface ExamServiceInterface {
 
     Exam getExam(Long id);
 
-    Exam saveExam(Exam exam);
+    Exam createExam(Exam exam);
+
+    Exam updateExam(Exam examm, Long Id);
 
     void deleteExam(Long id);
+
+    Exam getByStudentIdAndCourseId(Long studentId, Long courseId);
 
 }

@@ -17,6 +17,6 @@ public interface StudentServiceInterface {
 
     List<Student> getByNameAndSurname(String name, String surname);
 
-    List<Student> getByIndexNumber(String index);
+    Student getByIndexNumber(String index);
 
 }

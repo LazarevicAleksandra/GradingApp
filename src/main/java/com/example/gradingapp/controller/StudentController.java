@@ -31,15 +31,18 @@ public class StudentController {
 
     @GetMapping("")
     public ResponseEntity<List<Student>> getStudent(@RequestParam Optional<String> name,
-            @RequestParam Optional<String> surname, @RequestParam Optional<String> index) {
+            @RequestParam Optional<String> surname) {
         if (name.isPresent() && surname.isPresent()) {
             return new ResponseEntity<>(studentService.getByNameAndSurname(name.get(), surname.get()), null,
                     HttpStatus.OK);
-        } else if (index.isPresent()) {
-            return new ResponseEntity<>(studentService.getByIndexNumber(index.get()), null,
-                    HttpStatus.OK);
         } else
             return new ResponseEntity<List<Student>>(studentService.getStudents(), null, HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Student> getStudentByIndex(@RequestParam Optional<String> index) {
+        return new ResponseEntity<>(studentService.getByIndexNumber(index.get()), null,
+                HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

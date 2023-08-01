@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.gradingapp.exceptions.ResourceNotFoundException;
 import com.example.gradingapp.model.Student;
-import com.example.gradingapp.model.Teacher;
 import com.example.gradingapp.repository.StudentRepository;
 
 @Service
@@ -66,7 +65,7 @@ public class StudentService implements StudentServiceInterface {
     }
 
     @Override
-    public List<Student> getByIndexNumber(String index) {
+    public Student getByIndexNumber(String index) {
         return studentRepository.findByIndexNumberContainingIgnoreCase(index);
     }
 }

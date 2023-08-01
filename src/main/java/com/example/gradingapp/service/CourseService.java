@@ -73,7 +73,7 @@ public class CourseService implements CourseServiceInterface {
 
     @Override
     public void deleteCourse(Long id) {
-        if (courseRepository.findById(id) != null) {
+        if (courseRepository.existsById(id)) {
             courseRepository.deleteById(id);
         } else
             throw new ResourceNotFoundException();

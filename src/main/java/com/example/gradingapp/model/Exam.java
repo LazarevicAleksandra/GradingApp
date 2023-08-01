@@ -96,4 +96,12 @@ public class Exam {
         this.student = student;
     }
 
+    public Course getCourse() {
+        return this.course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
 }

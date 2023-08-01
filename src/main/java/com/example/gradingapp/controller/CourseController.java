@@ -38,15 +38,20 @@ public class CourseController {
             return new ResponseEntity<List<Course>>(courseService.getCourses(), null, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Course> getCourse(@PathVariable Long id, @RequestParam Optional<String> courseName,
+    @GetMapping("")
+    public ResponseEntity<Course> getCourseByParam(@RequestParam Optional<String> courseName,
             Optional<String> courseCode) {
         if (courseName.isPresent()) {
             return new ResponseEntity<Course>(courseService.getCourseByName(courseName.get()), null, HttpStatus.OK);
         } else if (courseCode.isPresent()) {
             return new ResponseEntity<Course>(courseService.getCourseByCode(courseCode.get()), null, HttpStatus.OK);
         } else
-            return new ResponseEntity<Course>(courseService.getCourse(id), null, HttpStatus.OK);
+            return new ResponseEntity<Course>(null, null, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Course> getCourse(@PathVariable Long id) {
+        return new ResponseEntity<Course>(courseService.getCourse(id), null, HttpStatus.OK);
     }
 
     @PostMapping("")
